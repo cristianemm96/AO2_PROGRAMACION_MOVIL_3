@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using ApiContactos.path;
-namespace AO1_PROG_MOVIL_3.controllers;
+using Microsoft.AspNetCore.Authorization;
+namespace ApiContactos.controllers;
 
 [ApiController]
 [Route("api/contacto")]
+[Authorize]
 
 public class ContactoController : ControllerBase
 {
