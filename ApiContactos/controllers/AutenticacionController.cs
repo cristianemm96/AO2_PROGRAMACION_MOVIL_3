@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using ApiContactos.path;
 using Microsoft.AspNetCore.Mvc;
 namespace ApiContactos.controllers;
 
@@ -14,8 +12,8 @@ public class AutenticacionController : ControllerBase
         this.autenticacionService = autenticacionService;
     }
 
-  
-    [HttpPost("/registrar")]
+
+    [HttpPost("registrar")]
     public ActionResult Registrase([FromBody] RegistrarUsuarioDTO usuario)
     {
         var usuarioNuevo = autenticacionService.RegistrarUsuario(usuario);
@@ -31,18 +29,17 @@ public class AutenticacionController : ControllerBase
 
     }
 
+    [HttpPost("login")]
 
-    [HttpPost("/Login")]
-
-public ActionResult Login ([FromBody] LoginRequest loginRequest)
+    public ActionResult Login([FromBody] LoginRequest loginRequest)
     {
         var token = autenticacionService.Autenticar(loginRequest);
-        if(token == null)
+        if (token == null)
         {
             return Unauthorized("Credenciales incorrectas");
         }
-        return Ok (new {Token=token});
+        return Ok(new { Token = token });
     }
-       
-    
+
+
 }

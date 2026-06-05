@@ -59,6 +59,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ClockSkew = TimeSpan.Zero
         };
     });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirFlutterWeb", policy =>
+    {
+        policy.WithOrigins("http://localhost:61273") 
+              .AllowAnyHeader()                     
+              .AllowAnyMethod();                    
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -68,7 +78,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
+app.UseCors("PermitirFlutterWeb");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

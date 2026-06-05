@@ -29,7 +29,7 @@ public class ContactoController : ControllerBase
         if (contacto == null) return NotFound();
         return Ok(contacto);
     }
-    [HttpPost("/add")]
+    [HttpPost("add")]
     public ActionResult CrearContacto([FromBody] Contacto nuevoContacto)
     {
         if (nuevoContacto == null)

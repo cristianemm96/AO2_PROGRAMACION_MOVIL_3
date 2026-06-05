@@ -38,12 +38,13 @@ public class ContactoService
     }
     public bool Editar(int Id, Contacto datosActualizados)
     {
-        var contacto = _dbContext.Contactos.Find(Id) ?? null;
+        var contacto = _dbContext.Contactos.Find(Id);
         if (contacto == null)
         {
             return false;
         }
-        _dbContext.Entry(Id).CurrentValues.SetValues(datosActualizados);
+        datosActualizados.Id = Id;
+        _dbContext.Entry(contacto).CurrentValues.SetValues(datosActualizados);
         _dbContext.SaveChanges();
         return true;
     }
